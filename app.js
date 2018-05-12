@@ -48,6 +48,7 @@ d3.select("svg")
     .attr("cx", d => xScale(d.urbanPopulationRate))
     .attr("cy", d => yScale(d.subscribersPer100))
     .attr("fill", d => colorScale(d.extremePovertyRate))
+    .attr("stroke", "#fff") // so that it is easier to spot overflowing elements
     .attr("r", d => radiusScale(d.medianAge));
 
 
