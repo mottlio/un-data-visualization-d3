@@ -34,6 +34,28 @@ d3.select("svg")
     .attr("fill", d => colorScale(d.extremePovertyRate))
     .attr("r", d => radiusScale(d.medianAge));
 
+
+//adding the GRID
+
+var xAxis = d3.axisBottom(xScale)
+                .tickSize(-height + 2*padding)
+                .tickSizeOuter(0);
+var yAxis = d3.axisLeft(yScale)
+                .tickSize(-width + 2*padding)
+                .tickSizeOuter(0);
+
+
+d3.select("svg")
+    .append("g")
+        .attr("transform", "translate(0," + (height-padding) + ")")
+        .call(xAxis);
+            
+d3.select("svg")
+    .append("g")
+        .attr("transform", "translate(" + padding +", 0)")
+        .call(yAxis);
+
+
 //adding title, X and Y axis labels
 
 

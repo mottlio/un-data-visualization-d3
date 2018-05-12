@@ -2,3 +2,8 @@ svg {
     margin: 0 auto;
     display: block;
   }
+
+  .tick{
+    stroke: #ccc;
+    stroke-dasharray: 5, 10; //length of dash and distance between dashes
+}
