@@ -36,6 +36,9 @@ d3.select("svg")
 
 //adding title, X and Y axis labels
 
+
+//TITLE 
+
 d3.select("svg")
   .append("text")
     .attr("x", width/2)
@@ -43,3 +46,24 @@ d3.select("svg")
     .style("text-anchor", "middle")
     .style("font-size", "1.2em")
     .text("Mobile subscriptions and urban population rate")
+
+//x-axis
+
+d3.select("svg")
+    .append("text")
+      .attr("x", width/2)
+      .attr("y", height - 30)
+      .attr("dy", "1.5em") //push text down relative to the x axis
+      .style("text-anchor", "middle")
+  .text("MObile subscriptions per 100")
+
+  //y-axis
+
+d3.select("svg")
+.append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("x", -height/2)
+  .attr("y", 30)
+  .attr("dy", "-1.1em")
+  .style("text-anchor", "middle")
+.text("Share of urban population");
