@@ -2,31 +2,47 @@ var width = 600;
 var height = 600;
 var padding = 80;
 
+function mustHaveKeys(obj){
+    var keys = [
+       "subscribersPer100",
+       "urbanPopulationRate",
+        "extremePovertyRate",
+        "medianAge"
+    ]
 
-var yMax = d3.max(regionData, d => d.subscribersPer100);
-var xMax = d3.max(regionData, d => d.urbanPopulationRate);
+    for(var i = 0; i < keys.length; i++){
+       if(obj[keys[i]] === null) return false 
+    }
+    return true;
+}
+
+var data = regionData.filter(mustHaveKeys);
+
+
+var yMax = d3.max(data, d => d.subscribersPer100);
+var xMax = d3.max(data, d => d.urbanPopulationRate);
 
 var xScale = d3.scaleLinear()
-                .domain(d3.extent(regionData, d => d.urbanPopulationRate))
+                .domain(d3.extent(data, d => d.urbanPopulationRate))
                 .range([padding, width - padding]);
 
 var yScale = d3.scaleLinear()
-                .domain(d3.extent(regionData, d => d.subscribersPer100))
+                .domain(d3.extent(data, d => d.subscribersPer100))
                 .range([height - padding, padding]);
 
 var colorScale = d3.scaleLinear()
-                    .domain(d3.extent(regionData, d => d.extremePovertyRate))
+                    .domain(d3.extent(data, d => d.extremePovertyRate))
                     .range(["yellow", "black"]);
 
 var radiusScale = d3.scaleLinear()
-                    .domain(d3.extent(regionData, d => d.medianAge))
+                    .domain(d3.extent(data, d => d.medianAge))
                     .range([15, 2]);
 
 d3.select("svg")
     .attr("width", width)
     .attr("height", height)
   .selectAll("circle")
-  .data(regionData)
+  .data(data)
   .enter()
   .append("circle")
     .attr("cx", d => xScale(d.urbanPopulationRate))
@@ -77,7 +93,7 @@ d3.select("svg")
       .attr("y", height - 30)
       .attr("dy", "1.5em") //push text down relative to the x axis
       .style("text-anchor", "middle")
-  .text("MObile subscriptions per 100")
+  .text("Mobile subscriptions per 100")
 
   //y-axis
 
